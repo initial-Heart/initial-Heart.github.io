@@ -133,4 +133,63 @@
         <tag>心情</tag>
       </tags>
   </entry>
+  <entry>
+    <title>多态-1</title>
+    <url>/2022/04/19/%E5%A4%9A%E6%80%81-1/</url>
+    <content><![CDATA[<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a><strong>多态</strong></h2><h3 id="多态概述"><a href="#多态概述" class="headerlink" title="多态概述"></a><strong>多态概述</strong></h3><p><strong>同一个对象</strong>，在<strong>不同时刻</strong>表现出的<strong>不同形态</strong>。</p>
+<p><strong>多态的前提和体现</strong></p>
+<p>1.有继承&#x2F;实现关系</p>
+<p>2.有方法重写</p>
+<p>3.有父类引用指向子类对象</p>
+<span id="more"></span>
+
+<p><strong>举例</strong>：</p>
+<p>新建一个<strong>Animal类</strong>，有<strong>age</strong>，<strong>eat</strong>方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="variable">age</span> <span class="operator">=</span><span class="number">40</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;动物吃东西！&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>新建一个<strong>Cat</strong>类继承<strong>Animal</strong>类，其中有<strong>age</strong> ,<strong>weight</strong>，<strong>eat</strong>方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="variable">age</span> <span class="operator">=</span><span class="number">30</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> weight=<span class="number">70</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>&#123;          <span class="comment">//2.方法重写</span></span><br><span class="line">    System.out.println(<span class="string">&quot;猫吃东西!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后main</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">    <span class="comment">//3.父类引用指向子类对象</span></span><br><span class="line">    Aniaml a=<span class="keyword">new</span> <span class="title class_">Cat</span>();</span><br><span class="line"></span><br><span class="line">    System.out.println(a.age);		<span class="comment">//输出40</span></span><br><span class="line">    System.out.println(a.weigth);	<span class="comment">//报错</span></span><br><span class="line">	a.eat();		<span class="comment">//输出猫吃东西!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">`<span class="number">40</span>`</span><br><span class="line">`猫吃东西!`</span><br></pre></td></tr></table></figure>
+
+<p>由此可见，编译的时候是<strong>看左面</strong>即<strong>父类</strong>中有无这个成员或方法，当<strong>方法重写</strong>之后则是输出重写之后的内容，没有被重写的还是<strong>父类</strong>中的内容<strong>。</strong></p>
+<h4 id="多态的好处与弊端"><a href="#多态的好处与弊端" class="headerlink" title="多态的好处与弊端"></a><strong>多态的好处与弊端</strong></h4><p><strong>好处</strong>：提高了程序的扩展性</p>
+<p>具体体现：定义方法的时候，使用<strong>父类</strong>型作为参数，将来在使用的时候，使用具体的<strong>子类</strong>型参与操作。</p>
+<p><strong>弊端</strong>：不能使用<strong>子类</strong>的特有功能</p>
+<h4 id="多态的转型：（实现子类的特有功能）"><a href="#多态的转型：（实现子类的特有功能）" class="headerlink" title="多态的转型：（实现子类的特有功能）"></a><strong>多态的转型：（实现子类的特有功能）</strong></h4><p><strong>向上转型</strong>：</p>
+<p>​					从子到父</p>
+<p>​					父类引用指向子类对象</p>
+<p><strong>向下转型</strong>：</p>
+<p>​					从父到子</p>
+<p>​					父类引用转为子类对象</p>
+<p>  向上转型：  <code>Aniaml a=new Cat();</code>结合上面例子，给cat类加一个Jump方法，那么<code>a.Jump</code>将无法被调用</p>
+<p>此时向下转型，<code>Cat c = (Cat )a;</code>将a有父类的对象强转为子类对象，此时就可以调用<code>a.Jump</code>。</p>
+<h4 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a><strong>抽象类</strong></h4><p>概述：一个没有<strong>方法体</strong>的方法应该被定义为<strong>抽象方法</strong>，而类中如果有<strong>抽象方法</strong>，该类必须定义为<strong>抽象类</strong></p>
+<p><strong>抽象类的特点</strong></p>
+<p>1.抽象类和抽象方法必须使用<strong>abstract</strong>关键字修饰</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">			<span class="keyword">public</span> **<span class="keyword">abstract</span>** class 类名&#123;&#125;</span><br><span class="line"></span><br><span class="line">​			<span class="keyword">public</span> **<span class="keyword">abstract</span>** <span class="keyword">void</span> eat（）；</span><br></pre></td></tr></table></figure>
+
+<p>2.抽象类中不一定有抽象方法，有抽象方法的类一定是抽象类</p>
+<p>3.抽象类不能实例化。</p>
+<p>​		如何实例化？参照多态的方式，通过子类对象实例化，叫抽象类多态</p>
+<p>4.抽象类的子类</p>
+<p>​			要么重写抽象类中的所有的抽象方法</p>
+<p>​			要么是抽象类</p>
+<p><strong>抽象类的成员特点</strong></p>
+<p>1.成员变量：可以是<strong>常量</strong>，也可以是<strong>变量</strong></p>
+<p>2.构造方法：有构造方法，但是不能实例化，用于子类访问父类数据的初始化</p>
+<p>3.成员方法：可以抽象方法（限定子类必须完成某些动作），也可以是非抽象方法（提高代码复用性）</p>
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><p>未完待续…</p>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>多态</tag>
+      </tags>
+  </entry>
 </search>
